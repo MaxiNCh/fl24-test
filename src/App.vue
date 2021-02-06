@@ -1,28 +1,53 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header></Header>
+    <Products :isLoading="isLoading" :products="products"></Products>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import Header from './components/Header.vue';
+import Products from './components/Products.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Header,
+    Products,
+  },
+  data: () => ({
+    products: [],
+    isLoading: false,
+  }),
+  methods: {
+    // Добавляю произвольное количество для каждого продукта,
+    // т.к. изначально в JSON из API нет количества.
+    addQty(fetchedProducts) {
+      let q = 1;
+      const newProducts = [];
+      fetchedProducts.forEach((item) => {
+        newProducts.push({ ...item, quantity: q });
+        q += 2;
+      });
+      this.products = newProducts;
+    },
+  },
+  beforeCreate() {
+    this.isLoading = true;
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((data) => {
+        this.addQty(data);
+        this.isLoading = false;
+      });
+  },
+  mounted() {
   },
 };
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: 'Roboto', sans-serif;
 }
 </style>
