@@ -6,22 +6,32 @@
     <h4><font-awesome-icon icon="sliders-h"/> Filters</h4>
     <ul class="filter__ul">
       <li class="filter__li">
-        <button class="filter__btn">Price</button>
+        <button @click="priceVisible = !priceVisible" class="filter__btn">
+          Price<font-awesome-icon v-if="!priceVisible" icon="caret-down"/>
+          <font-awesome-icon v-else icon="caret-up"/>
+        </button>
         <FilterRange
-          :min="0" :max="1000"
+          v-if="priceVisible" :min="0" :max="1000"
           @on-input-min="onPriceMin" @on-input-max="onPriceMax"
         ></FilterRange>
       </li>
       <li class="filter__li">
-        <button class="filter__btn">Quantity</button>
+        <button @click="qtyVisible = !qtyVisible" class="filter__btn">
+          Quantity<font-awesome-icon v-if="!qtyVisible" icon="caret-down"/>
+          <font-awesome-icon v-else icon="caret-up"/>
+        </button>
         <FilterRange
-          :min="0" :max="40"
+          v-if="qtyVisible" :min="0" :max="40"
           @on-input-min="onQtyMin" @on-input-max="onQtyMax"
         ></FilterRange>
       </li>
       <li class="filter__li">
-        <button class="filter__btn">Category</button>
-        <select @change="onChangeCategory"
+        <button @click="categVisible = !categVisible" class="filter__btn">
+          Category<font-awesome-icon v-if="!categVisible" icon="caret-down"/>
+          <font-awesome-icon v-else icon="caret-up"/>
+        </button>
+        <select
+          v-if="categVisible" @change="onChangeCategory"
           v-model="categories" name="categories" id="categories" multiple>
           <option value="">All</option>
           <option value="electronics">Electronics</option>
@@ -31,18 +41,23 @@
         </select>
       </li>
       <li class="filter__li">
-        <button class="filter__btn">Made in</button>
-        <input @change="onChangeCountry" v-model="countries.Australia"
-          type="checkbox" id="Australia" name="Australia">
-        <label for="Australia">Australia</label>
-        <br>
-        <input @change="onChangeCountry" v-model="countries.China"
-          type="checkbox" id="China" name="China">
-        <label for="China">China</label>
-        <br>
-        <input @change="onChangeCountry" v-model="countries.Russia"
-          type="checkbox" id="Russia" name="Russia">
-        <label for="Russia">Russia</label>
+        <button @click="countryVisible = !countryVisible" class="filter__btn">
+          Made in<font-awesome-icon v-if="!countryVisible" icon="caret-down"/>
+          <font-awesome-icon v-else icon="caret-up"/>
+        </button>
+        <div v-if="countryVisible">
+          <input @change="onChangeCountry" v-model="countries.Australia"
+            type="checkbox" id="Australia" name="Australia">
+          <label for="Australia">Australia</label>
+          <br>
+          <input @change="onChangeCountry" v-model="countries.China"
+            type="checkbox" id="China" name="China">
+          <label for="China">China</label>
+          <br>
+          <input @change="onChangeCountry" v-model="countries.Russia"
+            type="checkbox" id="Russia" name="Russia">
+          <label for="Russia">Russia</label>
+        </div>
       </li>
     </ul>
   </aside>
@@ -64,6 +79,10 @@ export default {
         China: false,
         Russia: false,
       },
+      priceVisible: false,
+      qtyVisible: false,
+      categVisible: false,
+      countryVisible: false,
     };
   },
   props: [
@@ -111,13 +130,27 @@ export default {
       padding: 0;
     }
     &__li {
-      border-bottom: 1px solid grey;
-      padding-bottom: 1em;
-      margin-top: 1em;
+      // border: 1px solid grey;
+      margin-bottom: 2em;
     }
     &__btn {
-      display: block;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 1em;
       margin-bottom: 1em;
+      width: 100%;
+      background-color: unset;
+      border: none;
+      font-size: 1em;
+      font-weight: bolder;
+      &:hover {
+        cursor: pointer;
+        color: darkgrey;
+      }
+      &:focus {
+        outline: none;
+      }
     }
     select {
       overflow: auto;

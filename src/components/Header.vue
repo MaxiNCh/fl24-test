@@ -7,12 +7,16 @@
 
 <style lang="scss">
   .header {
-    padding: 2em calc(50% - 590px);
+    padding: 2em;
+    margin: 0 calc(50% - 590px);
+    margin-bottom: 2em;
+    background-color: lightgrey;
     display: flex;
     justify-content: flex-end;
     &__img {
       height: 4rem;
       margin-right: 1rem;
+      margin-top: .6rem;
     }
     &__h1 {
       display: inline-block;

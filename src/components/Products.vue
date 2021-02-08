@@ -10,7 +10,7 @@
       v-model="search">
     </Filters>
     <Items :products="filteredProducts"></Items>
-    {{search}}
+    <div class="push"></div>
   </section>
 </template>
 
@@ -113,5 +113,6 @@ export default {
     padding: 0 calc(50% - 590px);
     display: grid;
     grid-template-columns: 1fr 4fr;
+    grid-row: 2 / 3;
   }
 </style>
