@@ -5,6 +5,7 @@
       <div>
         <p class="item__p">{{product.price}} USD</p>
         <p class="item__p">Quantity in stock: {{product.quantity}}</p>
+        <p class="item__p">Made in {{product.country}}</p>
       </div>
   </div>
 </template>

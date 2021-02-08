@@ -21,18 +21,28 @@
       </li>
       <li class="filter__li">
         <button class="filter__btn">Category</button>
-        <select>
-          <option>Electronics</option>
-          <option>Jewelery</option>
-          <option>Men clothing</option>
-          <option>Women clothing</option>
+        <select @change="onChangeCategory"
+          v-model="categories" name="categories" id="categories" multiple>
+          <option value="">All</option>
+          <option value="electronics">Electronics</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="men clothing">Men clothing</option>
+          <option value="women clothing">Women clothing</option>
         </select>
       </li>
       <li class="filter__li">
-        <button class="filter__btn">Sex</button>
-        <input type="checkbox" id="male" name="male"><label for="male">Male</label>
+        <button class="filter__btn">Made in</button>
+        <input @change="onChangeCountry" v-model="countries.Australia"
+          type="checkbox" id="Australia" name="Australia">
+        <label for="Australia">Australia</label>
         <br>
-        <input type="checkbox" id="woman" name="woman"><label for="woman">Woman</label>
+        <input @change="onChangeCountry" v-model="countries.China"
+          type="checkbox" id="China" name="China">
+        <label for="China">China</label>
+        <br>
+        <input @change="onChangeCountry" v-model="countries.Russia"
+          type="checkbox" id="Russia" name="Russia">
+        <label for="Russia">Russia</label>
       </li>
     </ul>
   </aside>
@@ -48,6 +58,12 @@ export default {
   },
   data() {
     return {
+      categories: [],
+      countries: {
+        Australia: false,
+        China: false,
+        Russia: false,
+      },
     };
   },
   props: [
@@ -66,9 +82,14 @@ export default {
     onQtyMin(value) {
       this.$emit('on-qty-min', value);
     },
+    onChangeCategory() {
+      this.$emit('filter-category', this.categories);
+    },
+    onChangeCountry() {
+      this.$emit('filter-country', this.countries);
+    },
   },
   mounted() {
-    console.log(this.filterRanges);
   },
 };
 </script>
@@ -97,6 +118,12 @@ export default {
     &__btn {
       display: block;
       margin-bottom: 1em;
+    }
+    select {
+      overflow: auto;
+      height: 7em;
+      width: 100%;
+      font-size: .9em;
     }
   }
 </style>

@@ -7,11 +7,9 @@
 
 <style lang="scss">
   .header {
-    padding: 0 calc(50% - 590px);
-    text-align: center;
+    padding: 2em calc(50% - 590px);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
     &__img {
       height: 4rem;
       margin-right: 1rem;
