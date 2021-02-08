@@ -19,10 +19,10 @@ export default {
 
 <style lang="scss">
   .items {
-    background-color: lightblue;
-    min-height: 300px;
     grid-column-start: 2;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
+    align-content: flex-start;
   }
 </style>

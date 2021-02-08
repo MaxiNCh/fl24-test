@@ -1,9 +1,11 @@
 <template>
   <div class="item">
     <img class="item__image" :src="product.image" alt="image">
-    <h4>{{product.title}}</h4>
-    <p>{{product.price}}</p>
-    <p>{{product.quantity}}</p>
+    <p class="item__p">{{product.title}}</p>
+      <div>
+        <p class="item__p">{{product.price}} USD</p>
+        <p class="item__p">Quantity in stock: {{product.quantity}}</p>
+      </div>
   </div>
 </template>
 
@@ -15,11 +17,27 @@ export default {
 </script>
 <style lang="scss">
   .item {
-    padding: 1em;
+    background-color: lightgrey;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    width: 14em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &__image {
-      height: 15em;
-      width: 15em;
+      border-radius: 5px 5px 0 0;
+      height: 13.9em;
+      width: 13.9em;
       background-size: contain;
+      &+p {
+        font-weight: bolder;
+      }
     }
+    &__p {
+      font-size: .9em;
+      margin: 1em 1em;
+    }
+
   }
 </style>

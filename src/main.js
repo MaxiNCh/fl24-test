@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { faSlidersH, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import App from './App.vue';
 
 library.add(faSlidersH);
+library.add(faSearch);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
